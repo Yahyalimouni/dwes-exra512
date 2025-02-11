@@ -44,12 +44,13 @@ class ModeloPedido12 {
             ':pk' => $npedido
         ];
 
-        if( !$stmt->execute($parms) && $stmt->fetch() ) {
-            $data = $stmt->fetch();
-            $pedido_object = new Pedido12($data);
-            return $pedido_object;
+        if( !$stmt->execute($parms) || !$stmt->fetch() ) {
+            return null;
         }
-        return null;
+ 
+        $data = $stmt->fetch();
+        $pedido_object = new Pedido12($data);
+        return $pedido_object;
     }
 }
 ?>
